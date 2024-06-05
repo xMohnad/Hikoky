@@ -1,0 +1,62 @@
+<!-- templates/manga.html -->
+{% extends "layout.html" %}
+
+    {% if info_manga %}
+{% block title %}{{ info_manga.manganame }}{% endblock %}
+    {% endif %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/manga.css') }}">
+{% endblock %}
+
+{% block content %}
+    {% if info_manga %}
+    <div class="cover-and-info">
+        <div class="cover">
+            <img src="{{ info_manga.cover_manga }}" alt="{{ info_manga.manganame }}" class="img-fluid rounded shadow-sm">
+        </div>
+        <div class="info">
+            <h1>{{ info_manga.manganame }}</h1>
+            <div class="mb-3">
+                {% for genre in info_manga.genres %}
+                    <span class="badge ar badge-primary">{{ genre }}</span>
+                {% endfor %}
+            </div>
+            <p class="ar">{{ info_manga.review_text }}</p>
+        </div>
+    </div>
+    {% endif %}
+    <br />        
+    {% if info_manga.chapter_number %}
+        <h2>({{ info_manga.chapter_number }}) فصول المانجا</h2>
+    {% else %}
+        <h2>فصول المانجا</h2>
+    {% endif %}
+    <div class="chapters ar">
+        {% if info_manga %}
+        <ul class="list">
+            {% for chapter in chapters %}
+                <li class="chapter-item">
+                    <a href="{{ request.path }}/{{ chapter.number }}">
+                        الفصل {{ chapter.number }}
+                        <span class="date">{{ chapter.date }}</span>
+                    </a>
+                </li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+        <div class="loading-dots">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+        {% if next_page_link %}
+            <div class="more" data-url="{{ next_page_link }}"></div>
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{{ url_for('static', filename='js/jquery_manga.js') }}"></script>
+{% endblock %}

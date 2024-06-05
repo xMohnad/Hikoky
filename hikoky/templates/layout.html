@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ app_name }} | {% block title %}{% endblock %}</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    {% block extra_css %}
+    
+    {% endblock %}
+</head>
+<body>
+    <header>
+        <nav class="nav-bar">
+            <div class="container-nav">
+                <a class="logo" href="{{ url_for('main.sources') }}">
+                    <h1 class="logo">{{ app_name }}</h1>
+                </a>
+                <div class="menu" id="navbarNav">
+                    <ul class="navlist">
+                        {% if current_source %}
+                            <li class="navitem">
+                                <a class="navlink" href="{{ url_for('main.home', source=current_source) }}">
+                                    <i class="fas fa-home"></i>
+                                </a>
+                            </li>
+                            <li class="navitem"> 
+                                <a class="navlink" href="{{ url_for('main.search', source=current_source) }}">
+                                    <i class="fas fa-search"></i>
+                                </a>
+                            </li>
+                        {% endif %}
+                        <li class="navitem">
+                            <button id="theme-toggle" onclick="toggleTheme()">
+                                <i id="theme-icon" class="fas fa-moon"></i>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="container">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="alert-container">
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ category }}">
+                                {% if category == 'danger' %}
+                                    <i class="fas fa-exclamation-circle"></i>
+                                {% elif category == 'success' %}
+                                    <i class="fas fa-check-circle"></i>
+                                {% elif category == 'info' %}
+                                    <i class="fas fa-info-circle"></i>
+                                {% elif category == 'warning' %}
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                {% endif %}
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+
+            {% block content %}
+            
+            {% endblock %}
+        </div>
+    </main>
+    {% block extra_js %}
+    {% endblock %}
+    <footer class="footer">
+        <div class="container-footer">
+            <div class="social-links">
+                <a href="https://twitter.com/xMohnad13 " class="social-link" target="_blank">
+                    <i class="fab fa-twitter"></i> 
+                    <i class="fa-brands fa-x-twitter"></i>تويتر
+                </a>
+                <a href="https://t.me/xMohnad" class="social-link" target="_blank">
+                    <i class="fab fa-telegram-plane"></i> تليجرام
+                </a>
+            </div>
+        </div>
+    </footer>
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            const themeIcon = document.getElementById('theme-icon');
+            body.classList.toggle('light-mode');
+    
+            if (body.classList.contains('light-mode')) {
+                localStorage.setItem('theme', 'light');
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            } else {
+                localStorage.removeItem('theme');
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+            }
+        }
+    
+        document.addEventListener('DOMContentLoaded', () => {
+            const themeIcon = document.getElementById('theme-icon');
+            if (localStorage.getItem('theme') === 'light') {
+                document.body.classList.add('light-mode');
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            } else {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const year = new Date().getFullYear();
+            document.querySelector('.footer-bottom p').innerHTML = `${year} {{ app_name }}.`;
+        });
+    </script>
+</body>
+</html>

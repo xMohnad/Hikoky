@@ -1,0 +1,48 @@
+<!-- templates/chapter.html -->
+{% extends "layout.html" %}
+{% block title %}{{ manga_info.title }}{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/chapter.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+{% endblock %}
+
+{% block content %}
+    <div id="Button">
+        <div id="FullScreen" onclick="toggleFullScreen()">
+            <i class="fa-solid fa-expand fa-2xs" style="color: #404040;"></i>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="title">
+            <h1>{{ manga_info.title }}</h1>
+        </div>
+
+        <div class="chapter" id="readerarea">
+            {% for image_url in manga_info.image_urls %}
+                <div class="page-break">
+                    <img id="image-{{ loop.index }}" data-src="{{ image_url }}" alt="{{ manga_info.name }} {{ loop.index }}/{{ loop.length }}" class="chapter-image lazy" style="display:none;">
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="navigation no-select" id="bottom-navigation">
+            {% if manga_info.prev_chapter_link %}
+                <a href="{{ request.path | replace(request.path.split('/')[-1], manga_info.prev_chapter_link) }}" class="Previous">السابق</a>
+            {% else %}
+                <a class="Previous hidden">السابق</a>
+            {% endif %}
+        
+            {% if manga_info.next_chapter_link %}
+                <a href="{{ request.path | replace(request.path.split('/')[-1], manga_info.next_chapter_link) }}" class="Next">التالي</a>
+            {% else %}
+                <a class="Next hidden">التالي</a>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+{% block extra_js %}
+    <script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.3.0/dist/lazyload.min.js"></script>
+    <script src="{{ url_for('static', filename='js/chapter.js') }}"></script>
+{% endblock %}

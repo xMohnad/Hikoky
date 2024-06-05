@@ -1,0 +1,65 @@
+<!-- templates/home.html -->
+{% extends "layout.html" %}
+{% block title %}قائمة المانجا{% endblock %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+{% endblock %}
+
+{% block content %}
+    <div class="heading">
+        <h1 id="heading-title" class="no-select">أحدث الإضافات</h1>
+    </div>
+    <div class="manga-list">
+        {% for result in results %}
+            <div class="box">
+                <div class="manga">
+                    <div id="manga-item-{{ result.id }}" class="item-thumb c-image-hover" data-post-id="{{ result.id }}">
+                        <a href="{{ request.path }}/{{ result.manga_link }}" title="{{ result.manga_name }}">
+                            {% if result.translation_team %}
+                                <span class="manga-title-badges">{{ result.translation_team }}</span>
+                            {% endif %}
+                            <img src="{{ result.manga_cover }}" alt="{{ result.manga_name }}">
+                        </a>
+                    </div>
+                    <div class="post-title">
+                        <h3 class="h5">
+                            <a href="{{ request.path }}/{{ result.manga_link }}">{{ result.manga_name }}</a>
+                        </h3>
+                    </div>
+                    <div class="list-chapter">
+                        <div class="chapter-item has-thumb">
+                            <span class="chapter font-meta">
+                                {% if result.chapters_info.latest_chapter_number %}
+                                    <a href="{{ request.path }}/{{ result.manga_link }}/{{ result.chapters_info.latest_chapter_url }}" class="btn-link">{{ result.chapters_info.latest_chapter_number }}</a>
+                                {% endif %}
+                            </span>
+                        </div>
+                        <div class="chapter-item has-thumb">
+                            <span class="chapter font-meta">
+                                {% if result.chapters_info.penultimate_chapter_number %}
+                                    <a href="{{ request.path }}/{{ result.manga_link }}/{{ result.chapters_info.penultimate_chapter_url }}" class="btn-link">{{ result.chapters_info.penultimate_chapter_number }}</a>
+                                {% endif %}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    {% if next_page_url %}
+    <div class="more">
+        <div class="loading-dots">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+        <button id="load-more" data-url="{{ next_page_url }}" class="btn btn-primary no-select">
+            المزيد
+        </button>
+    </div>
+    {% endif %}
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{{ url_for('static', filename='js/jquery_home.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,396 @@
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", Poppins, sans-serif;
+    line-height: 1.5;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    padding: 10px;
+}
+
+post-title h3 {
+    margin: 3px;
+    padding: 4px;
+}
+
+post-title h3 a {
+    display: inline-block;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+    padding: 5px 0;
+}
+
+.post-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.post-title h3 {
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 18px; 
+    font-weight: bold; 
+}
+
+.post-title h3 a {
+    color: inherit;
+    text-decoration: none;
+    display: inline-block;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.list-chapter .chapter-item + .chapter-item {
+    margin-top: 5px;
+}
+
+.manga-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 20px;
+    
+}
+
+.box {
+    margin-bottom: 15px;
+}
+
+.item-thumb img {
+    border-radius: 4px;
+    width: 100%; 
+    height: auto;
+}
+.item-thumb a img {
+    transition: transform 0.3s ease, box-shadow 0.3s ease; 
+}
+
+.item-thumb a img:hover {
+    transform: scale(1.05); 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+}
+
+.item-thumb a img:focus {
+    transform: scale(1.1); 
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    
+    outline: none; 
+}
+
+.heading h1 {
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  line-height: 1.5em;
+  padding-bottom: 20px;
+}
+
+.heading {
+  text-align: right;
+  color: #ffffffcb;
+  margin-right: 20px;
+  position: relative;
+}
+
+body.light-mode .heading {
+    color: #242424;
+}
+
+
+.heading h1:before {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  height: 5px;
+  width: 55px;
+  background-color: #FF4500;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+body.light-mode .heading h1:before {
+    background-color: #ca361f;
+}
+.heading h1:after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 2px;
+  height: 1px;
+  width: 95%;
+  max-width: 255px;
+  background-color: #333;
+  transition: all 0.3s ease;
+}
+
+.heading h1.active:before,
+.heading h1.active:after {
+  width: 100px;
+  background-color: #FF6347;
+}
+
+.heading h1.active:after {
+  width: 100%;
+  background-color: #555;
+}
+
+@media (max-width: 600px) {
+  .heading h1 {
+    font-size: 24px; 
+    padding-bottom: 15px;
+    margin-right: 10px;
+  }
+
+  .heading h1:before {
+    width: 40px; 
+    height: 4px; 
+  }
+
+  .heading h1:after {
+    width: 90%;
+  }
+}
+
+.chapter-item {
+    display: inline-block;
+    margin-right: 13px;
+}
+
+.chapter-item.has-thumb .chapter a.btn-link {
+    color: rgba(255, 255, 255, 0.8);
+    background-color: #222;
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 20px;
+    border: 2px solid #2d4e6e;
+    transition: all 0.3s ease;
+}
+body.light-mode .chapter-item.has-thumb .chapter a.btn-link {
+    background-color: #bbbbbb;
+    color: #6d6d6d; 
+    border: 2px solid #487fb3;
+    
+}
+
+
+
+.chapter-item.has-thumb .chapter a.btn-link:hover {
+    background-color: #444;
+    color: #fff; 
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+body.light-mode .chapter-item.has-thumb .chapter a.btn-link:hover {
+    background-color: #4e4e4e;
+    color: rgba(49,49,49,0.946);
+}
+
+
+
+.chapter-item.has-thumb .chapter a.btn-link:visited {
+    background-color: #333; 
+    color: rgba(155,155,255,0.8); 
+}
+body.light-mode .chapter-item.has-thumb .chapter a.btn-link:visited {
+    background-color: #9c9c9c; 
+    color: rgba(155,167,255,0.988); 
+}
+
+
+.chapter-item.has-thumb .chapter a.btn-link:focus {
+    background-color: #555; 
+    color: #fff; 
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.4); 
+    transform: scale(1.1);
+    transition: transform 0.2s ease-out; 
+}
+body.light-mode .chapter-item.has-thumb .chapter a.btn-link:focus {
+    background-color: #bababa; 
+    color: #242424;
+}
+
+
+.more {
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.loading-dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out, top 0.5s ease-in-out;
+}
+
+.loading-dots.show {
+    opacity: 1;
+    top: -30px;
+    margin-top: 15px;
+    
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    background-color: #fff;
+    border-radius: 50%;
+    margin: 0 5px;
+    animation: move 0.5s infinite alternate ease-in-out;
+}
+
+body.light-mode .dot {
+    background-color: #2a5c7e;
+}
+
+.dot:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.dot:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.dot:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes move {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-10px);
+    }
+}
+
+
+#load-more {
+    background: linear-gradient(135deg, #2C3E50, #34495E);
+    border: none;
+    color: white; 
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    margin: 10px 2px;
+    cursor: pointer;
+    border-radius: 13px 5px; 
+    transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+body.light-mode #load-more {
+     background: linear-gradient(135deg, #6287ac, #92adc7);
+    color: #242424;
+}
+
+#load-more:hover {
+    background: linear-gradient(135deg, #34495E, #2C3E50); 
+    transform: translateY(-2px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+}
+body.light-mode #load-more:hover {
+    background: linear-gradient(135deg, #6589ae, #5d85ac); 
+}
+
+#load-more:active {
+    background: linear-gradient(135deg, #2C3E50, #34495E); 
+    transform: translateY(1px); 
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.25); 
+}
+body.light-mode #load-more:active {
+    background: linear-gradient(135deg, #6084a7, #34495E); 
+}
+
+#load-more::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background: rgba(255, 255, 255, 0.15); 
+    transform: translate(-50%, -50%) scale(0);
+    border-radius: 50%;
+    transition: transform 0.5s ease-out;
+}
+body.light-mode #load-more::before {
+    background: rgba(255,255,255,0.657); 
+    background: rgba(255,255,255,0.657); 
+}
+
+#load-more:active::before {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+#load-more::after {
+    content: '⬇';
+    font-size: 1.2em;
+    margin-left: 10px;
+    transition: transform 0.3s;
+}
+
+#load-more.animate::after {
+    animation: bounce 0.5s ease-in-out forwards;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(5px);
+    }
+}
+
+.dot.error {
+    background-color: #f01c1c;
+}
+
+.no-select {
+    user-select: none; 
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none; 
+}
+
+.manga-title-badges {
+    background-color: rgba(210,32,61,0.902); /* لون خلفية العلامة */
+    color: #ffffff; /* لون النص في العلامة */
+    padding: 3px 6px; /* هوامش داخلية للعلامة */
+    border-radius: 4px; /* شكل حواف العلامة */
+    position: absolute; /* تحديد موضع العلامة بالنسبة للصورة */
+    top: 5px; /* المسافة العمودية من الأعلى */
+    left: 5px; /* المسافة الأفقية من اليسار */
+    font-size: 12px; /* حجم النص في العلامة */
+    font-weight: bold; /* سماكة النص */
+}
+
+.item-thumb {
+    position: relative; 
+}

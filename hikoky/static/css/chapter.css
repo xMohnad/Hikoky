@@ -1,0 +1,202 @@
+:root {
+  --color-primary: #1c3749;
+  --color-secondary: #2a658b;
+  --color-button: #296e9a;
+  --color-button-hover: #2f58b7d2;
+  --color-button-active: #1c639c;
+  --color-button-disabled: #888;
+  --color-button-disabled-hover: #aaa;
+  --color-background: #1f1f1f;
+  --color-text: #f1f1f1;
+  --color-title-bg: rgba(52,105,141,0.693);
+  --color-title-bg-gradient: rgba(77,87,108,0.764);
+  --color-title-text: #ffffffd4;
+  --color-shadow: rgba(0, 0, 0, 0.1);
+  --color-shadow-hover: rgba(0, 0, 0, 0.2);
+  --color-shadow-active: rgba(0, 0, 0, 0.25);
+  --color-glow: rgba(255, 255, 255, 0.2);
+}
+
+body {
+    background-color: var(--color-background);
+    color: var(--color-text);
+    font-family: Arial, sans-serif;
+    padding: 0;
+}
+html, body {
+    scroll-behavior: smooth;
+}
+.title {
+    text-align: center;
+    margin-bottom: 3px;
+    margin-top: 6px;
+    background: linear-gradient(135deg, var(--color-title-bg), var(--color-title-bg-gradient));
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px var(--color-shadow), 0 0 15px var(--color-glow);
+    position: relative;
+    overflow: hidden;
+}
+
+.title::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+    transform: translateX(-50%) rotate(45deg);
+    opacity: 0.5;
+    transition: opacity 0.3s;
+}
+
+.title:hover::before {
+    opacity: 0.7;
+}
+
+.title h1 {
+    font-size: 21px;
+    color: var(--color-title-text);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    margin: 0;
+}
+
+.container {
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+.chapter {
+    text-align: center;
+}
+
+.page-break {
+    margin-bottom: 0;
+}
+
+.page-break img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+  20%, 40%, 60%, 80% { transform: translateX(5px); }
+  100% { transform: translateX(0); }
+}
+
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 25px;
+  margin-top: 4px;
+  background: linear-gradient(to right, var(--color-primary), var(--color-secondary));
+  border-radius: 5px;
+}
+
+.navigation a {
+  padding: 10px 20px;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+  font-size: 14px;
+  position: relative;
+  background: linear-gradient(135deg, var(--color-button), var(--color-button-hover), var(--color-button-active));
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 6px var(--color-shadow), 0 0 10px var(--color-shadow) inset;
+}
+
+.navigation a.hidden {
+  background: linear-gradient(135deg, var(--color-button-disabled), var(--color-button-disabled-hover));
+  color: #ccc;
+  cursor: not-allowed;
+  pointer-events: auto;
+  position: relative;
+}
+
+.navigation a.hidden:active {
+  animation: shake 0.5s;
+}
+
+.navigation a:hover:not(.hidden) {
+  background: linear-gradient(135deg, var(--color-button-hover), var(--color-button-active));
+  transform: translateY(-2px);
+  box-shadow: 0 8px 12px var(--color-shadow-hover);
+}
+
+.navigation a:active:not(.hidden) {
+  transform: translateY(1px);
+  box-shadow: 0 2px 6px var(--color-shadow-active);
+}
+
+.navigation .Next::after {
+  content: '▶';
+  margin-left: 5px;
+}
+
+.navigation .Previous::before {
+  content: '◀';
+  margin-right: 5px;
+}
+
+.no-select {
+    user-select: none; 
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none; 
+}
+
+
+#Button {
+    position: fixed;
+    bottom: 2vh;
+    right: 2vw;
+    z-index: 999;
+    transition: transform 0.5s ease-in-out;
+}
+
+#FullScreen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 10vw;
+    height: 10vw;
+    max-width: 50px;
+    max-height: 50px;
+    min-width: 30px;
+    min-height: 30px;
+    border-radius: 50%;
+    background-color: #ffffff8e;
+    box-shadow: 0 2px 14px rgba(0, 0, 0, 0.221);
+    cursor: pointer;
+    transition: transform 0.5s, box-shadow 0.2s, background-color 0.2s;
+    outline: none;
+}
+
+#FullScreen:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.60);
+}
+
+#FullScreen:focus {
+    outline: none;
+}
+
+#FullScreen i {
+    font-size: 2rem;
+    color: #000000;
+}
+
+#Button.hidden {
+    transform: translateY(180%);
+}
